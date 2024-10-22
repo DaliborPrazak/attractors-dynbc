@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath} % 
+\usepackage{amssymb} % 
+\usepackage{amstext}
+%\usepackage[notref,notcite]{showkeys}
+\usepackage[utf8]{inputenc}
+%\usepackage[czech]{babel}
+\usepackage{verbatim}
+\usepackage{xcolor}
+
+\overfullrule 5pt
+
+\parindent 0pt
+\frenchspacing
+\usepackage{a4wide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% definice
+
+\definecolor{alloy}{RGB}{196,98,16}
+\definecolor{clue}{RGB}{59,157,239}
+
+\newcommand{\BUNO}{\textcolor{blue}{WLOG}\ }
+
+\newcommand{\uje}{u^{(1)}}
+\newcommand{\ude}{u^{(2)}}
+
+\newcommand{\vek}[1]{\pmb{#1}}
+\newcommand{\parcd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ddy}{\frac{\partial^2}{\partial y^2}}
+\newcommand{\sqlx}{\sqrt{\lambda+\xi^2}}
+\newcommand{\sqls}{\sqrt{\lambda+s^2}}
+\newcommand{\dy}{\parcd{}{y}}
+
+\newcommand{\dert}{\partial_t}
+\newcommand{\da}{\mathcal{D}(A)}
+\newcommand{\diver}{\operatorname{div}}
+\newcommand{\curl}{\operatorname{curl}}
+\newcommand{\entau}[1]{[({#1})n]_{\tau}}
+\newcommand{\rr}{\mathbb R}
+\newcommand{\norm}[3]{\lVert #1 \rVert_{#2}^{#3}}
+\newcommand{\ldvaom}{L^2(\Omega)}
+\newcommand{\ldvagm}{L^2(\Gamma)}
+\newcommand{\lpeom}{L^p(\Omega)}
+\newcommand{\lpegm}{L^p(\Gamma)}
+\newcommand{\intom}{\int\limits_\Omega}
+\newcommand{\intgm}{\int\limits_\Gamma}
+%\newcommand{\dentau}[1]{\left[(D{#1})n\right]_\tau}
+
+%% H^{\infty} - calculus
+\newcommand{\hhinf}{\mathcal{H}^{\infty}}
+\newcommand{\cc}{\mathbb C}
+
+%%% addenda
+\newcommand{\attr}{\mathcal{A}}
+
+
+
+\begin{document}
+Let us consider the 2D NSE system with dynamic boundary condition
+\begin{align}	\label{eq-1}
+\dert u - \nu \Delta u + (u\cdot \nabla) u + \nabla \pi &= f
+\qquad \diver{u} = 0 \qquad\textrm{in $\Omega$}
+\\		\label{eq-2}
+\beta \dert u + \alpha u + \nu \entau{Du} &= \beta h
+\qquad u\cdot n = 0 \qquad\textrm{on $\Gamma = \partial \Omega$}
+\end{align}
+where $\Omega \subset \rr^2$ is a suitable planar domain.
+It was shown in \cite{PZ24}, given that $\Omega$ is smooth
+and {\it bounded}, the fractal dimension of the global attractor can
+be estimated as
+\begin{equation}	\label{es-1}
+\dim_{H}(\attr) \le c_0 \frac{M_\beta}{m^{3/2}_\alpha}
+\cdot \frac{\ell^2\norm{F}{H}{}}{\nu^2}
+\end{equation}
+where $F=(f,h)$, $H=L^2(\Omega \times \Gamma)$, $
+\ell \sim \operatorname{diam}\Omega$ is the characteristic
+length  and
+\begin{equation}	\label{defMm}
+m_\alpha = \min\{1 , \alpha \ell / \nu \}
+\qquad
+M_\beta = \max\{ 1 , \beta / \ell \}
+\end{equation}
+One observes that the last term in \eqref{es-1} corresponds
+to the so-called Grashof number $G = \norm{F}{H}{} / \lambda_1 \nu^2$.
+For $\alpha \to \infty$, $\beta \to \infty$, 
+boundary condition \eqref{eq-2} reduces to homogeneous Dirichlet $u=0$,
+while \eqref{es-1} reduces to $\dim(\attr) \le G$, which is consistent
+with the best available estimate in this setting, see \cite{Te97}.
+
+\par\medskip
+{\bf Question.} What about the limit $\alpha$, $\beta \to 0$?
+This would reduce \eqref{eq-2} to $\entau{Du} = 0$, where one
+has an improved estimate
+\begin{equation}	\label{es-2}
+\dim(\attr) \le c_1 G^{2/3}
+\end{equation}
+(up to some logarithmic term); see \cite{Il94}, \cite{Zi98}. 
+Note that \eqref{es-2} also holds in case of periodic boundary
+conditions, see \cite{Te97}. Unfortunately, our estimate \eqref{es-1} 
+blows up for for $\alpha$ small, so a different approach is needed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par\medskip
+{\bf Some ideas.} Let us work with $\omega = \curl u$, which is
+motivated by two facts. Firstly, $\entau{Du} = \omega$ on $\Gamma$,
+at least for the flat boundary. Secondly, the estimate \eqref{es-2}
+is proved while working with $u\in W^{1,2}(\Omega)$, or testing the equation
+with $Au = -\Delta u$. This is equivalent to working with
+$\omega \in L^2$, or testing the equation for $\omega$ by $\omega$. 
+\par
+So, let us apply $\curl$ to \eqref{eq-1}, to get
+\begin{align}	\label{cu-1}
+\dert \omega - \nu \Delta \omega + (u\cdot \nabla)\omega &= \curl f
+\qquad\textrm{in $\Omega$}
+\\      \label{cu-2}
+\beta \dert u + \alpha u + \nu \omega &= \beta h
+\qquad\textrm{on $\Gamma = \partial \Omega$}
+\end{align}
+Now we have several tasks:
+\begin{enumerate}
+\item Prove the estimate \eqref{es-2} for this system if
+$\alpha$, $\beta=0$. This seems to work, see a sketch
+(TODO) below.
+
+\item Show that somehow the estimate is robust 
+also for $\alpha$, $\beta$ very small, maybe via some
+asymptotic similarity of both systems?
+
+\item As previous taks is presumably hard, we could
+also look at some further simplification. For example,
+we ignore the interior evolution completely, that is to
+say, to replace \eqref{cu-1} by
+\begin{equation}	\label{eq-1st}
+- \nu \Delta u + (u\cdot \nabla) u + \nabla \pi = f
+\end{equation}
+or even take $f=0$. This makes sense since for $\beta$ small,
+the boundary evolution is much faster than the interior one.
+
+\item Last, but not least: prove just the existence of global
+attractor for (\ref{eq-1}--\ref{eq-2}) in case of $\Omega$
+{\it unbounded}. This is not trivial because of problems 
+with both dissipativity (no Poincaré inequality)
+and asymptotic compactness (unbouded domain).
+
+\end{enumerate}
+
+
+
+
+\begin{thebibliography}{10}
+
+%\bibitem{AACG18} Acevedo, Amrouche, Conca, Ghos. 
+%C. R. Math. Acad. Sci. Paris, 2019. DOI 10.1016/j.crma.2018.12.002 
+%\bibitem{AG18} Amrita Ghosh, Ph.D. thesis, 2018.
+%\bibitem{EM19} Erika Maringová, Ph.D. thesis, 2019.
+\bibitem{Il94} Ilyin, A.A.: Partly dissipative semigroups generated by the Navier-Stokes system on two-dimensional manifolds, and their attractors. Russ. Acad. Sci., Sb., Math. 78(1), 47–76 (1994).
+\bibitem{PZ24} D. Pražák, M. Zelina: Strong solutions and attractor dimension for 2D NSE with dynamic boundary conditions. J. Evol. Equ. 24, 20 (2024). 
+\bibitem{Te97} Temam, R.: Infinite-dimensional dynamical systems in mechanics and physics, Applied Mathemat- ical Sciences, vol. 68, second edn. Springer-Verlag, New York (1997).
+\bibitem{Zi98} Ziane, M.: On the two-dimensional Navier-Stokes equations with the free boundary condition. Appl. Math. Optim. 38(1), 1–19 (1998).
+
+
+\end{thebibliography}
+
+
+
+\end{document}
